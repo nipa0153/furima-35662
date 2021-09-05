@@ -11,9 +11,7 @@ usersテーブル
 | first_name         | string  | null: false               |
 | last_kana          | string  | null: false               |
 | first_kana         | string  | null: false               |
-| birthday_year      | integer | null: false               |
-| birthday_month     | integer | null: false               |
-| birthday_date      | integer | null: false               |
+| birthday           | date    | null: false               |
 
 - has_many :items
 - has_many :buyers
@@ -21,16 +19,17 @@ usersテーブル
 
 itemsテーブル
 
-| Column      | Type       | Options     |
-| ----------- | ---------- | ----------- |
-| items_name  | string     | null: false |
-| explanation | text       | null: false |
-| category    | integer    | null: false |
-| postage     | integer    | null: false |
-| shipping    | integer    | null: false |
-| days        | integer    | null: false |
-| price       | integer    | null: false |
-| users_id    | references |             |
+| Column        | Type       | Options           |
+| ------------- | ---------- | ----------------- |
+| items_name    | string     | null: false       |
+| explanation   | text       | null: false       |
+| category_id   | integer    | null: false       |
+| condition_id  | integer    | null: false       |
+| postage_id    | integer    | null: false       |
+| prefecture_id | integer    | null: false       |
+| days_id       | integer    | null: false       |
+| price         | integer    | null: false       |
+| users         | references | foreign_key: true |
 
 - has_one :buyer
 - belongs_to :user
@@ -38,10 +37,10 @@ itemsテーブル
 
 buyerテーブル
 
-| Column   | Type       | Options |
-| -------- | ---------- | ------- |
-| users_id | references |         |
-| items_id | references |         |
+| Column | Type       | Options           |
+| ------ | ---------- | ----------------- |
+| users  | references | foreign_key: true |
+| items  | references | foreign_key: true |
 
 - has_one    :shipping_add
 - belongs_to :user
@@ -49,14 +48,13 @@ buyerテーブル
 
 shipping_addテーブル
 
-| Column        | Type       | Options     |
-| ------------- | ---------- | ----------- |
-| postal_number | string     | null: false |
-| prefecture    | integer    | null: false |
-| city          | integer    | null: false |
-| address       | string     | null: false |
-| building_name | string     |             |
-| tel           | integer    | null: false |
-| buyers_id     | references |             |
+| Column        | Type       | Options           |
+| ------------- | ---------- | ----------------- |
+| postal_number | string     | null: false       |
+| city          | string     | null: false       |
+| address       | string     | null: false       |
+| building_name | string     |                   |
+| tel           | integer    | null: false       |
+| buyers        | references | foreign_key: true |
 
 - belongs_to :buyer
