@@ -29,7 +29,7 @@ itemsテーブル
 | prefecture_id | integer    | null: false       |
 | days_id       | integer    | null: false       |
 | price         | integer    | null: false       |
-| users         | references | foreign_key: true |
+| user          | references | foreign_key: true |
 
 - has_one :buyer
 - belongs_to :user
@@ -37,10 +37,13 @@ itemsテーブル
 
 buyerテーブル
 
-| Column | Type       | Options           |
-| ------ | ---------- | ----------------- |
-| users  | references | foreign_key: true |
-| items  | references | foreign_key: true |
+| Column           | Type       | Options           |
+| ---------------- | ---------- | ----------------- |
+| card_number_id   | integer    | null: false       |
+| expiration_id    | integer    | null: false       |
+| security_code_id | integer    | null: false       |
+| user             | references | foreign_key: true |
+| item             | references | foreign_key: true |
 
 - has_one    :shipping_add
 - belongs_to :user
@@ -54,7 +57,7 @@ shipping_addテーブル
 | city          | string     | null: false       |
 | address       | string     | null: false       |
 | building_name | string     |                   |
-| tel           | integer    | null: false       |
-| buyers        | references | foreign_key: true |
+| tel           | text       | null: false       |
+| buyer         | references | foreign_key: true |
 
 - belongs_to :buyer
