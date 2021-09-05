@@ -39,9 +39,6 @@ buyerテーブル
 
 | Column           | Type       | Options           |
 | ---------------- | ---------- | ----------------- |
-| card_number_id   | integer    | null: false       |
-| expiration_id    | integer    | null: false       |
-| security_code_id | integer    | null: false       |
 | user             | references | foreign_key: true |
 | item             | references | foreign_key: true |
 
@@ -54,6 +51,7 @@ shipping_addテーブル
 | Column        | Type       | Options           |
 | ------------- | ---------- | ----------------- |
 | postal_number | string     | null: false       |
+| prefecture_id | integer    | null: false       |
 | city          | string     | null: false       |
 | address       | string     | null: false       |
 | building_name | string     |                   |
