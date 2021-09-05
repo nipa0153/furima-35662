@@ -1,28 +1,3 @@
-<!-- # README
-
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ... -->
-
 テーブル設計
 
 usersテーブル
@@ -55,17 +30,18 @@ buyerテーブル
 | -------- | ---- | ------- |
 |          |      |         |
 
-- has_one    :delivered_add
+- has_one    :shipping_add
 - belongs_to :users
 - belongs_to :items
 
-delivered_addテーブル
+shipping_addテーブル
 
 | Column        | Type   | Options     |
 | ------------- | ------ | ----------- |
-| postal_num    | string | null: false |
+| postal_number | string | null: false |
 | city          | string | null: false |
 | address       | string | null: false |
 | building_name | string |             |
+| tel           | string | null: false |
 
 - belongs_to :buyer
