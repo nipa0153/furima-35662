@@ -35,7 +35,7 @@ itemsテーブル
 - belongs_to :user
 
 
-buyerテーブル
+buyersテーブル
 
 | Column           | Type       | Options           |
 | ---------------- | ---------- | ----------------- |
@@ -46,7 +46,7 @@ buyerテーブル
 - belongs_to :user
 - belongs_to :item
 
-shipping_addテーブル
+shipping_addsテーブル
 
 | Column        | Type       | Options           |
 | ------------- | ---------- | ----------------- |
@@ -55,7 +55,7 @@ shipping_addテーブル
 | city          | string     | null: false       |
 | address       | string     | null: false       |
 | building_name | string     |                   |
-| tel           | text       | null: false       |
+| tel           | string     | null: false       |
 | buyer         | references | foreign_key: true |
 
 - belongs_to :buyer
