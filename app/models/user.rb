@@ -7,8 +7,9 @@ class User < ApplicationRecord
   with_options presence: true do
     validates :nickname
     validates :birthday
-
-
+    PASSWORD_REGEX = /\A(?=.*?[a-z])(?=.*[\d])[a-z\d]+\z/i.freeze
+    validates_format_of :password, with: PASSWORD_REGEX, message: "is invalid. Input including both alphabets and numbers."
+  
     with_options format: {with: /\A[ぁ-んァ-ヶ一-龥々ー]+\z/, message: "is invalid. Input full-width characters."} do
       validates :last_name
       validates :first_name
@@ -17,7 +18,7 @@ class User < ApplicationRecord
     with_options format: {with: /\A[ァ-ヶー]+\z/, message: "is invalid. Input fullwidth katakana characters."} do
       validates :last_kana
       validates :first_kana
-    end 
+    end
   end
 
   # has_many :items
