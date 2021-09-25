@@ -8,7 +8,6 @@ class Item < ApplicationRecord
   belongs_to :day
 
   belongs_to :user
-  # has_many :items
   has_one_attached :image
   # - has_many :buyers
 

@@ -2,7 +2,7 @@ class ItemsController < ApplicationController
   before_action :authenticate_user!, except: :index
 
   def index
-    @items = Item.all
+    # @items = Item.all
   end
 
   def new
@@ -11,11 +11,11 @@ class ItemsController < ApplicationController
 
   def create
     @item = Item.new(item_params)
-    @item.user_id = current_user.id
-    if @item.save
-      redirect_to root_path #action: :index
+    if @item.user_id == current_user.id
+      @item.save
+      redirect_to root_path
     else
-      render :new #action: :new
+      render :new
     end
   end
 
