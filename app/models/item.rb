@@ -2,19 +2,19 @@ class Item < ApplicationRecord
   extend ActiveHash::Associations::ActiveRecordExtensions
 
   belongs_to :category
-  berongs_to :condition
+  belongs_to :condition
   belongs_to :postage
-  belongs_to :prefecture
+  belongs_to_active_hash :prefecture
   belongs_to :day
 
-  has_many :items
+  belongs_to :user
+  # has_many :items
   has_one_attached :image
   # - has_many :buyers
 
   with_options presence: true do
     validates :items_name
     validates :explanation
-    validates :price
     validates :image
 
     with_options numericality: { other_than: 1, message: "can't be blank"} do
@@ -24,5 +24,7 @@ class Item < ApplicationRecord
       validates :prefecture_id
       validates :days_id
     end
+
+    validates :price, format: {with: /\A[\d]+\z/}, numericality: {only_integer: true, greater_than_or_equal_to: 300, less_than_or_equal_to: 9999999, message: "is invalid"}
   end
 end
