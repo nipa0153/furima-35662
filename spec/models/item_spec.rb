@@ -26,31 +26,31 @@ RSpec.describe Item, type: :model do
         expect(@item.errors.full_messages).to include("Explanation can't be blank")
       end
 
-      it 'category_idがなければ出品できない' do
+      it 'category_idの値が選択されていない(idが１)場合は出品できない' do
         @item.category_id = ''
         @item.valid?
         expect(@item.errors.full_messages).to include("Category can't be blank")
       end
 
-      it 'Condition_idがなければ出品できない' do
+      it 'Condition_idの値が選択されていない(idが１)場合は出品できない' do
         @item.condition_id = ''
         @item.valid?
         expect(@item.errors.full_messages).to include("Condition can't be blank")
       end
 
-      it 'postage_idがなければ出品できない' do
+      it 'postage_idの値が選択されていない(idが１)場合は出品できない' do
         @item.postage_id = ''
         @item.valid?
         expect(@item.errors.full_messages).to include("Postage can't be blank")
       end
 
-      it 'prefecture_idがなければ出品できない' do
+      it 'prefecture_idの値が選択されていない(idが１)場合は出品できない' do
         @item.prefecture_id = ''
         @item.valid?
         expect(@item.errors.full_messages).to include("Prefecture can't be blank")
       end
 
-      it 'days_idがなければ出品できない' do
+      it 'days_idの値が選択されていない(idが１)場合は出品できない' do
         @item.days_id = ''
         @item.valid?
         expect(@item.errors.full_messages).to include("Days can't be blank")
@@ -67,7 +67,24 @@ RSpec.describe Item, type: :model do
         @item.valid?
         expect(@item.errors.full_messages).to include("User must exist")
       end
+      
+      it 'priceが全角文字では出品できない' do
+        @item.price = '２２111'
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Price is invalid")
+      end
 
+      it 'priceが300円未満では出品できない'do
+        @item.price = '299'
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Price is invalid")
+      end
+
+      it 'priceが9999999円未満では出品できない'do
+        @item.price = '10000000'
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Price is invalid")
+      end      
     end
   end
 end
