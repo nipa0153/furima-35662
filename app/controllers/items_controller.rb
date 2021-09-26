@@ -22,10 +22,6 @@ class ItemsController < ApplicationController
 
   def item_params
     params.require(:item).permit(
-      :nickname, :email,
-      :encrypted_password, :last_name,
-      :first_name, :last_kana, 
-      :first_kana, :birthday, 
       :image, :category_id, 
       :condition_id, :postage_id, 
       :prefecture_id, :days_id, 
