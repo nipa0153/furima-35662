@@ -27,33 +27,33 @@ RSpec.describe Item, type: :model do
       end
 
       it 'category_idの値が選択されていない(idが１)場合は出品できない' do
-        @item.category_id = ''
+        @item.category_id = '1'
         @item.valid?
-        expect(@item.errors.full_messages).to include("Category can't be blank")
+        expect(@item.errors.full_messages).to include("Category is invalid. choose on and after 2")
       end
 
       it 'Condition_idの値が選択されていない(idが１)場合は出品できない' do
-        @item.condition_id = ''
+        @item.condition_id = '1'
         @item.valid?
-        expect(@item.errors.full_messages).to include("Condition can't be blank")
+        expect(@item.errors.full_messages).to include("Condition is invalid. choose on and after 2")
       end
 
       it 'postage_idの値が選択されていない(idが１)場合は出品できない' do
-        @item.postage_id = ''
+        @item.postage_id = '1'
         @item.valid?
-        expect(@item.errors.full_messages).to include("Postage can't be blank")
+        expect(@item.errors.full_messages).to include("Postage is invalid. choose on and after 2")
       end
 
       it 'prefecture_idの値が選択されていない(idが１)場合は出品できない' do
-        @item.prefecture_id = ''
+        @item.prefecture_id = '1'
         @item.valid?
-        expect(@item.errors.full_messages).to include("Prefecture can't be blank")
+        expect(@item.errors.full_messages).to include("Prefecture is invalid. choose on and after 2")
       end
 
       it 'days_idの値が選択されていない(idが１)場合は出品できない' do
-        @item.days_id = ''
+        @item.days_id = '1'
         @item.valid?
-        expect(@item.errors.full_messages).to include("Days can't be blank")
+        expect(@item.errors.full_messages).to include("Days is invalid. choose on and after 2")
       end
 
       it 'imageがなければ出品できない' do
@@ -62,6 +62,11 @@ RSpec.describe Item, type: :model do
         expect(@item.errors.full_messages).to include("Image can't be blank")
       end
       
+      it 'priceが空では出品できない' do
+        @item.price = ''
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Price can't be blank")
+      end
       it 'priceが全角文字では出品できない' do
         @item.price = '２２111'
         @item.valid?

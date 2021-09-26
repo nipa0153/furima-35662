@@ -16,7 +16,7 @@ class Item < ApplicationRecord
     validates :explanation
     validates :image
 
-    with_options numericality: { other_than: 1, message: "can't be blank"} do
+    with_options numericality: { other_than: 1, message: "is invalid. choose on and after 2"} do
       validates :category_id
       validates :condition_id
       validates :postage_id
