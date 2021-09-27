@@ -5,11 +5,11 @@ class Item < ApplicationRecord
   belongs_to :condition
   belongs_to :postage
   belongs_to_active_hash :prefecture
-  belongs_to :day
+  belongs_to :delivery_day
 
   belongs_to :user
   has_one_attached :image
-  # - has_many :buyers
+  has_many :buyers
 
   with_options presence: true do
     validates :items_name
@@ -21,7 +21,7 @@ class Item < ApplicationRecord
       validates :condition_id
       validates :postage_id
       validates :prefecture_id
-      validates :days_id
+      validates :delivery_day_id
     end
 
     validates :price, format: {with: /\A[\d]+\z/}, numericality: {only_integer: true, greater_than_or_equal_to: 300, less_than_or_equal_to: 9999999, message: "is invalid"}
