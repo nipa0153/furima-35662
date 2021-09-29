@@ -51,7 +51,7 @@ RSpec.describe Item, type: :model do
       end
 
       it 'days_idの値が選択されていない(idが１)場合は出品できない' do
-        @item.days_id = '1'
+        @item.delivery_day_id = '1'
         @item.valid?
         expect(@item.errors.full_messages).to include("Days is invalid. choose on and after 2")
       end
