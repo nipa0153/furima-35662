@@ -58,6 +58,12 @@ RSpec.describe BuyersShippingAdd, type: :model do
         expect(@buyers_shipping_add.errors.full_messages).to include("Tel is invalid.")
       end
 
+      it 'telが英数混合では登録できない' do
+        @buyers_shipping_add.tel = '0901234asdf'
+        @buyers_shipping_add.valid?
+        expect(@buyers_shipping_add.errors.full_messages).to include("Tel is invalid.")
+      end
+
       it 'tokenがなければ登録できない' do
         @buyers_shipping_add.token = ''
         @buyers_shipping_add.valid?
