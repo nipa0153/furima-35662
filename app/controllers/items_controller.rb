@@ -60,8 +60,12 @@ class ItemsController < ApplicationController
 
   def move_to_index
     if user_signed_in?
-      unless current_user.id == @item.user_id
-        redirect_to action: :index
+      if @item.buyers.empty?
+        unless current_user.id == @item.user_id
+          redirect_to action: :index
+        end
+      else
+        redirect_to root_path
       end
     else
       redirect_to user_session_path

@@ -9,8 +9,8 @@ class Item < ApplicationRecord
 
   belongs_to :user
   has_one_attached :image
-  has_many :buyers
-
+  has_one :buyer
+  
   with_options presence: true do
     validates :items_name
     validates :explanation
