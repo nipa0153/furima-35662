@@ -1,5 +1,4 @@
 FactoryBot.define do
-  factory :buyer do
-    
+  factory :shipping_add do
   end
 end
