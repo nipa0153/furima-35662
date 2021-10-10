@@ -4,10 +4,10 @@ class BuyersShippingAdd
 
   with_options presence: true do
     validates :postal_number, format: {with: /\A\d{3}[-]\d{4}\z/, message: "is invalid. include hyphen(-)"}
+    validates :prefecture_id, numericality: { other_than: 1, message: "is invalid. choose on and after 2" }
     validates :city
     validates :address
-    validates :tel,           format: {with: /\A\d{,11}\z/, message: "is invalid."}
-    validates :prefecture_id, numericality: { other_than: 1, message: "is invalid. choose on and after 2" }
+    validates :tel,           format: {with: /\A\d{9,11}\z/, message: "is invalid."}
     validates :user_id
     validates :item_id
     validates :token

@@ -35,18 +35,10 @@ class BuyersController < ApplicationController
       currency: 'jpy'
     )
   end
-    
+
   def move_to_index
-    if user_signed_in?
-      if current_user.id == @item.user_id 
-        redirect_to root_path
-      else
-        if @item.buyer.present?
-          redirect_to root_path
-        end
-      end
-    else
-      redirect_to user_session_path
-    end
+    return redirect_to user_session_path unless user_signed_in?
+    return redirect_to root_path if current_user.id == @item.user_id
+    return redirect_to root_path if @item.buyer.present?
   end
 end

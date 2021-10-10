@@ -59,16 +59,8 @@ class ItemsController < ApplicationController
   end
 
   def move_to_index
-    if user_signed_in?
-      if @item.buyer == nil
-        unless current_user.id == @item.user_id
-          redirect_to action: :index
-        end
-      else
-        redirect_to root_path
-      end
-    else
-      redirect_to user_session_path
-    end
+    return redirect_to user_session_path unless user_signed_in?
+    return redirect_to root_path if @item.buyer.present?
+    return redirect_to action: :index if current_user.id != @item.user_id
   end
 end

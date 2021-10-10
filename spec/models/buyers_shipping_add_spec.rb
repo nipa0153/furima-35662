@@ -34,6 +34,12 @@ RSpec.describe BuyersShippingAdd, type: :model do
         expect(@buyers_shipping_add.errors.full_messages).to include('Postal number is invalid. include hyphen(-)')
       end
 
+      it 'prefecture_idが空では登録できない' do
+        @buyers_shipping_add.prefecture_id = ''
+        @buyers_shipping_add.valid?
+        expect(@buyers_shipping_add.errors.full_messages).to include("Prefecture can't be blank")        
+      end
+
       it 'cityが空では登録できない' do
         @buyers_shipping_add.city = ''
         @buyers_shipping_add.valid?
@@ -52,7 +58,12 @@ RSpec.describe BuyersShippingAdd, type: :model do
         expect(@buyers_shipping_add.errors.full_messages).to include("Tel can't be blank")                
       end
 
-      it 'telが12桁以上は登録できない' do
+      it 'telが9桁以上でなければ登録できない' do
+        @buyers_shipping_add.tel = '09012345'
+        @buyers_shipping_add.valid?
+        expect(@buyers_shipping_add.errors.full_messages).to include("Tel is invalid.")        
+      end
+      it 'telが12桁以上は登録できない' do 
         @buyers_shipping_add.tel = '090123456789'
         @buyers_shipping_add.valid?
         expect(@buyers_shipping_add.errors.full_messages).to include("Tel is invalid.")
@@ -68,6 +79,18 @@ RSpec.describe BuyersShippingAdd, type: :model do
         @buyers_shipping_add.token = ''
         @buyers_shipping_add.valid?
         expect(@buyers_shipping_add.errors.full_messages).to include("Token can't be blank")
+      end
+
+      it 'userが紐付いていなければ登録できない' do
+        @buyers_shipping_add.user_id = ''
+        @buyers_shipping_add.valid?
+        expect(@buyers_shipping_add.errors.full_messages).to include("User can't be blank")        
+      end
+
+      it 'itemが紐付いていなければ登録できない' do
+        @buyers_shipping_add.item_id = ''
+        @buyers_shipping_add.valid?
+        expect(@buyers_shipping_add.errors.full_messages).to include("Item can't be blank")        
       end
     end
   end
