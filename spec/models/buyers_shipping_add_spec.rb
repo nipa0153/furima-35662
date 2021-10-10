@@ -40,6 +40,12 @@ RSpec.describe BuyersShippingAdd, type: :model do
         expect(@buyers_shipping_add.errors.full_messages).to include("Prefecture can't be blank")        
       end
 
+      it 'prefecture_idの値が選択されていない(idが１)場合は出品できない' do
+        @buyers_shipping_add.prefecture_id = '1'
+        @buyers_shipping_add.valid?
+        expect(@buyers_shipping_add.errors.full_messages).to include("Prefecture is invalid. choose on and after 2")
+      end
+
       it 'cityが空では登録できない' do
         @buyers_shipping_add.city = ''
         @buyers_shipping_add.valid?

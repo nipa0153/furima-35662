@@ -1,5 +1,5 @@
 class BuyersController < ApplicationController
-  before_action :authenticate_user!, except: :index
+  before_action :authenticate_user!
   before_action :set_item, only: [:index, :create]
   before_action :move_to_index, only: :index
 
@@ -37,7 +37,6 @@ class BuyersController < ApplicationController
   end
 
   def move_to_index
-    return redirect_to user_session_path unless user_signed_in?
     return redirect_to root_path if current_user.id == @item.user_id
     return redirect_to root_path if @item.buyer.present?
   end
